@@ -10,63 +10,72 @@ services:
     ports:
       - "8080:5000"
     
-
   cat1:
     image: server
     container_name: cat1
     environment:
-      - APP=cat  
+      - APP=cat
+      - SERV=1
 
   cat2:
     image: server
     container_name: cat2
     environment:
       - APP=cat
+      - SERV=2
 
   cat3:
     image: server
     container_name: cat3
     environment:
-      - APP=cat  
+      - APP=cat
+      - SERV=3
     
   dog1:
     image: server
     container_name: dog1
     environment:
       - APP=dog
+      - SERV=1
 
   dog2:
     image: server
     container_name: dog2
     environment:
       - APP=dog
+      - SERV=2
   
   dog3:
     image: server
     container_name: dog3
     environment:
       - APP=dog
+      - SERV=3
 
   mouse1:
     image: server
     container_name: mouse1
     environment:
       - APP=mouse
+      - SERV=1
     
   mouse2:
     image: server
     container_name: mouse2
     environment:
       - APP=mouse
+      - SERV=2
     
   fish1:
     image: server
     container_name: fish1
     environment:
       - APP=fish
+      - SERV=1
     
   fish2:
     image: server
     container_name: fish2
     environment:
       - APP=fish
+      - SERV=2
