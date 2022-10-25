@@ -1,0 +1,23 @@
+paths:
+  
+  - path: /cat
+    servers:
+      - cat1:5000
+      - cat2:5000
+      - cat3:5000
+  
+  - path: /dog
+    servers:
+      - dog1:5000
+      - dog2:5000
+      - dog3:5000
+
+  - path: /mouse
+    servers:
+      - mouse1:5000
+      - mouse2:5000
+
+  - path: /fish
+    servers:
+      - fish1:5000
+      - fish2:5000
