@@ -1,6 +1,6 @@
 from itertools import cycle
-from flask import Flask, request
-import requests, random, os
+from flask import Flask
+import requests, os
 import yaml
 
 loadbalancer = Flask(__name__)
@@ -11,6 +11,8 @@ def load_configuration(path):
     for entry in config["paths"]:
         entry["servers"] = cycle(entry["servers"])
     return config
+
+config = load_configuration('/app/loadbalancer.yml')
 
 def round_robin(iter):
     return next(iter)
@@ -27,10 +29,8 @@ def try_redirect(entry):
         response = requests.get("http://{}".format(chosen))
         return response.content, response.status_code
     except:
-        entry["servers"] = reload_cycle_skip(entry["servers"], chosen)
+        entry["servers"] = reload_cycle_skip(entry["servers"], chosen)   
         return try_redirect(entry)
-
-config = load_configuration('/app/loadbalancer.yml')
 
 @loadbalancer.route('/')
 def landing():
@@ -38,6 +38,10 @@ def landing():
 
 @loadbalancer.route('/<path>')
 def path_router(path):
+    global config
+    if os.path.isfile("/app/restart"):
+        config = load_configuration("/app/loadbalancer.yml")
+        os.remove("/app/restart")
     for entry in config["paths"]:
         if ("/"+path) == entry["path"]:
             return try_redirect(entry)

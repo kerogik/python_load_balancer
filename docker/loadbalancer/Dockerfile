@@ -6,4 +6,4 @@ COPY ./loadbalancer.py /app/loadbalancer.py
 
 COPY ./loadbalancer.yml /app/loadbalancer.yml
 
-CMD ["python", "/app/loadbalancer.py"]
+CMD python /app/loadbalancer.py
